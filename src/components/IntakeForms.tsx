@@ -12,7 +12,7 @@ const tabs: { id: FormType; label: string }[] = [
   { id: "blended", label: "Blended Family" },
 ];
 
-const FORMSPREE_ID = "xqevpdel";
+// form submission handled via /api/submit-form
 
 /* ─── Shared styles ─── */
 const inp: React.CSSProperties = {
@@ -173,21 +173,42 @@ function SubmitBtn({ loading }: { loading: boolean }) {
   );
 }
 
-async function submitToFormspree(data: FormData, formType: string): Promise<boolean> {
-  data.set("_formType", formType);
-  data.set("_subject", `New ${formType} Enquiry — The Bridge Wellness Centre`);
+async function submitForm(formType: string, data: FormData): Promise<{ pdf: string; filename: string } | null> {
+  const fields: Record<string, string> = {};
+  data.forEach((val, key) => {
+    if (!key.startsWith("_")) {
+      const v = val.toString().trim();
+      if (v) fields[key] = v;
+    }
+  });
   try {
-    const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, { method: "POST", body: data, headers: { Accept: "application/json" } });
-    return res.ok;
+    const res = await fetch("/api/submit-form", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ formType, fields }),
+    });
+    if (!res.ok) return null;
+    return await res.json();
   } catch {
-    return false;
+    return null;
   }
+}
+
+function downloadPDF(base64: string, filename: string) {
+  const bytes = Uint8Array.from(atob(base64), (c) => c.charCodeAt(0));
+  const blob = new Blob([bytes], { type: "application/pdf" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.click();
+  URL.revokeObjectURL(url);
 }
 
 /* ══════════════════════════════════════════════════════════════
    1. INDIVIDUAL THERAPY
 ══════════════════════════════════════════════════════════════ */
-function IndividualForm({ onSuccess }: { onSuccess: () => void }) {
+function IndividualForm({ onSuccess }: { onSuccess: (pdf: string, filename: string) => void }) {
   const [loading, setLoading] = useState(false);
   const [format, setFormat] = useState("");
   const [gender, setGender] = useState("");
@@ -229,10 +250,10 @@ function IndividualForm({ onSuccess }: { onSuccess: () => void }) {
     const data = new FormData(form);
     data.set("concernsList", concerns.join(", ") || "None selected");
     data.set("therapyApproaches", therapyApproaches.join(", ") || "None selected");
-    const ok = await submitToFormspree(data, "Individual Therapy");
+    const result = await submitForm("Individual Therapy", data);
     setLoading(false);
-    if (ok) {
-      onSuccess(); form.reset();
+    if (result) {
+      onSuccess(result.pdf, result.filename); form.reset();
       setConcerns([]); setTherapyApproaches([]);
       setFormat(""); setGender(""); setRelStatus(""); setLivingSituation("");
       setHasChildren(""); setEmployed(""); setFaith(""); setAppetite(""); setPhysActivity("");
@@ -462,7 +483,7 @@ function IndividualForm({ onSuccess }: { onSuccess: () => void }) {
 /* ══════════════════════════════════════════════════════════════
    2. MARRIAGE / COUPLES COACHING
 ══════════════════════════════════════════════════════════════ */
-function CouplesForm({ onSuccess }: { onSuccess: () => void }) {
+function CouplesForm({ onSuccess }: { onSuccess: (pdf: string, filename: string) => void }) {
   const [loading, setLoading] = useState(false);
   const [children, setChildren] = useState("");
   const [indivTherapy, setIndivTherapy] = useState("");
@@ -484,9 +505,9 @@ function CouplesForm({ onSuccess }: { onSuccess: () => void }) {
     const form = e.currentTarget;
     const data = new FormData(form);
     data.set("primaryConcerns", concerns.join(", ") || "None selected");
-    const ok = await submitToFormspree(data, "Marriage Coaching");
+    const result = await submitForm("Marriage Coaching", data);
     setLoading(false);
-    if (ok) { onSuccess(); form.reset(); setConcerns([]); setChildren(""); setIndivTherapy(""); setCouplesTherapy(""); setWilling(""); setDvSafety(""); setCrisis(""); }
+    if (result) { onSuccess(result.pdf, result.filename); form.reset(); setConcerns([]); setChildren(""); setIndivTherapy(""); setCouplesTherapy(""); setWilling(""); setDvSafety(""); setCrisis(""); }
   }
 
   return (
@@ -573,7 +594,7 @@ function CouplesForm({ onSuccess }: { onSuccess: () => void }) {
 /* ══════════════════════════════════════════════════════════════
    3. CHILD & ADOLESCENT THERAPY
 ══════════════════════════════════════════════════════════════ */
-function ChildForm({ onSuccess }: { onSuccess: () => void }) {
+function ChildForm({ onSuccess }: { onSuccess: (pdf: string, filename: string) => void }) {
   const [loading, setLoading] = useState(false);
   const [gender, setGender] = useState("");
   const [language, setLanguage] = useState("");
@@ -624,10 +645,10 @@ function ChildForm({ onSuccess }: { onSuccess: () => void }) {
     data.set("whoIdentifiedTherapy", whoIdentified.join(", "));
     data.set("concernAreas", areas.join(", ") || "None selected");
     data.set("functioningAffected", functioning.join(", "));
-    const ok = await submitToFormspree(data, "Child & Adolescent Therapy");
+    const result = await submitForm("Child & Adolescent Therapy", data);
     setLoading(false);
-    if (ok) {
-      onSuccess(); form.reset();
+    if (result) {
+      onSuccess(result.pdf, result.filename); form.reset();
       setAreas([]); setFamilyChanges([]); setWhoIdentified([]); setFunctioning([]);
       setGender(""); setLanguage(""); setGuardianRole(""); setSiblings(""); setParentContact("");
       setPregnancy(""); setMilestones(""); setMedConditions(""); setMedications(""); setTrauma("");
@@ -893,7 +914,7 @@ function ChildForm({ onSuccess }: { onSuccess: () => void }) {
 /* ══════════════════════════════════════════════════════════════
    4. BLENDED FAMILY THERAPY
 ══════════════════════════════════════════════════════════════ */
-function BlendedForm({ onSuccess }: { onSuccess: () => void }) {
+function BlendedForm({ onSuccess }: { onSuccess: (pdf: string, filename: string) => void }) {
   const [loading, setLoading] = useState(false);
   const [relStatus, setRelStatus] = useState("");
   const [secondMarriage, setSecondMarriage] = useState("");
@@ -928,10 +949,10 @@ function BlendedForm({ onSuccess }: { onSuccess: () => void }) {
     const form = e.currentTarget;
     const data = new FormData(form);
     data.set("primaryConcerns", concerns.join(", ") || "None selected");
-    const ok = await submitToFormspree(data, "Blended Family Therapy");
+    const result = await submitForm("Blended Family Therapy", data);
     setLoading(false);
-    if (ok) {
-      onSuccess(); form.reset(); setConcerns([]);
+    if (result) {
+      onSuccess(result.pdf, result.filename); form.reset(); setConcerns([]);
       setRelStatus(""); setSecondMarriage(""); setChildrenTogether(""); setSpecialNeeds("");
       setConnection(""); setConflictFreq(""); setIndivTherapy(""); setCouplesTherapy("");
       setChildrenTherapy(""); setCoParenting(""); setWilling(""); setChildrenInSessions("");
@@ -1133,18 +1154,26 @@ function BlendedForm({ onSuccess }: { onSuccess: () => void }) {
 /* ══════════════════════════════════════════════════════════════
    MAIN EXPORT
 ══════════════════════════════════════════════════════════════ */
-function SuccessMessage({ onReset }: { onReset: () => void }) {
+function SuccessMessage({ onReset, pdf, filename }: { onReset: () => void; pdf: string; filename: string }) {
   return (
     <div style={{ background: "#F5F0E8", padding: "48px 40px", borderRadius: 4, textAlign: "center" }}>
       <div style={{ fontFamily: "var(--font-cormorant), serif", fontStyle: "italic", fontSize: 28, color: "#5C8C6E", marginBottom: 14 }}>
         Thank you for reaching out
       </div>
-      <p style={{ fontFamily: "var(--font-jost), sans-serif", fontWeight: 300, fontSize: 17, lineHeight: 1.8, color: "#6E6A64", margin: "0 0 24px", maxWidth: 480, marginLeft: "auto", marginRight: "auto" }}>
+      <p style={{ fontFamily: "var(--font-jost), sans-serif", fontWeight: 300, fontSize: 17, lineHeight: 1.8, color: "#6E6A64", margin: "0 0 28px", maxWidth: 480, marginLeft: "auto", marginRight: "auto" }}>
         Miriam has received your form and will reply personally within 1–2 business days. You don&apos;t have to carry this alone.
       </p>
-      <button onClick={onReset} style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: 13, letterSpacing: "0.1em", textTransform: "uppercase", color: "#5C8C6E", background: "none", border: "none", cursor: "pointer", padding: 0, borderBottom: "1px solid #C2CFC4" }}>
-        Submit another enquiry
+      <button
+        onClick={() => downloadPDF(pdf, filename)}
+        style={{ display: "inline-block", fontFamily: "var(--font-jost), sans-serif", fontSize: 13, letterSpacing: "0.1em", textTransform: "uppercase", color: "#fff", background: "#5C8C6E", padding: "14px 28px", borderRadius: 2, border: "none", cursor: "pointer", marginBottom: 20 }}
+      >
+        Download your copy (PDF)
       </button>
+      <div>
+        <button onClick={onReset} style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: 13, letterSpacing: "0.1em", textTransform: "uppercase", color: "#9A958C", background: "none", border: "none", cursor: "pointer", padding: 0, borderBottom: "1px solid #C2CFC4" }}>
+          Submit another enquiry
+        </button>
+      </div>
     </div>
   );
 }
@@ -1154,10 +1183,21 @@ export default function IntakeForms() {
   const serviceParam = searchParams.get("service") as FormType | null;
   const [active, setActive] = useState<FormType>("individual");
   const [submitted, setSubmitted] = useState(false);
+  const [submittedPdf, setSubmittedPdf] = useState<{ pdf: string; filename: string } | null>(null);
 
   useEffect(() => {
     if (serviceParam && tabs.some((t) => t.id === serviceParam)) setActive(serviceParam);
   }, [serviceParam]);
+
+  function handleSuccess(pdf: string, filename: string) {
+    setSubmittedPdf({ pdf, filename });
+    setSubmitted(true);
+  }
+
+  function handleReset() {
+    setSubmitted(false);
+    setSubmittedPdf(null);
+  }
 
   return (
     <div>
@@ -1166,7 +1206,7 @@ export default function IntakeForms() {
         {tabs.map((tab) => (
           <button
             key={tab.id}
-            onClick={() => { setActive(tab.id); setSubmitted(false); }}
+            onClick={() => { setActive(tab.id); handleReset(); }}
             style={{
               fontFamily: "var(--font-jost), sans-serif",
               fontSize: 12.5,
@@ -1188,14 +1228,14 @@ export default function IntakeForms() {
         ))}
       </div>
 
-      {submitted ? (
-        <SuccessMessage onReset={() => setSubmitted(false)} />
+      {submitted && submittedPdf ? (
+        <SuccessMessage onReset={handleReset} pdf={submittedPdf.pdf} filename={submittedPdf.filename} />
       ) : (
         <>
-          {active === "individual" && <IndividualForm onSuccess={() => setSubmitted(true)} />}
-          {active === "marriage" && <CouplesForm onSuccess={() => setSubmitted(true)} />}
-          {active === "child" && <ChildForm onSuccess={() => setSubmitted(true)} />}
-          {active === "blended" && <BlendedForm onSuccess={() => setSubmitted(true)} />}
+          {active === "individual" && <IndividualForm onSuccess={handleSuccess} />}
+          {active === "marriage" && <CouplesForm onSuccess={handleSuccess} />}
+          {active === "child" && <ChildForm onSuccess={handleSuccess} />}
+          {active === "blended" && <BlendedForm onSuccess={handleSuccess} />}
         </>
       )}
 
