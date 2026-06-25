@@ -126,7 +126,8 @@ export default function Footer() {
                 color: "#CBD5CD",
               }}
             >
-              <span>hello@bridgewellness.co.ke</span>
+              <span>thebridgewellnesscentre@gmail.com</span>
+              <span>0723 314 805</span>
               <span>Nairobi, Kenya</span>
               <span>Virtual sessions worldwide</span>
             </div>

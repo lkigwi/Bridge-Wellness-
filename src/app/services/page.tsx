@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { Suspense } from "react";
+import IntakeForms from "@/components/IntakeForms";
 
 export const metadata: Metadata = {
   title: "Services | The Bridge Wellness Centre",
@@ -104,14 +106,37 @@ export default function Services() {
         </div>
       </div>
 
+      {/* Intake forms */}
+      <div style={{ background: "#FAFAF8" }}>
+        <div style={{ maxWidth: 1240, margin: "0 auto", padding: "90px 48px" }}>
+          <div style={{ textAlign: "center", marginBottom: 54 }}>
+            <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: 12, letterSpacing: "0.24em", textTransform: "uppercase", color: "#9A958C", marginBottom: 16 }}>
+              Book a session
+            </div>
+            <h2 style={{ fontFamily: "var(--font-marcellus), serif", fontSize: "clamp(28px, 3.5vw, 40px)", color: "#2A2A28", margin: "0 0 18px", fontWeight: 400 }}>
+              Begin your journey
+            </h2>
+            <p style={{ fontFamily: "var(--font-jost), sans-serif", fontWeight: 300, fontSize: 17, lineHeight: 1.8, color: "#6E6A64", margin: "0 auto", maxWidth: 520 }}>
+              Select the service that fits your situation and complete the intake form below. Miriam will be in touch within 1–2 business days.
+            </p>
+          </div>
+          <Suspense fallback={<div style={{ padding: 32, color: "#9A958C", fontFamily: "var(--font-jost), sans-serif", textAlign: "center" }}>Loading form…</div>}>
+            <IntakeForms />
+          </Suspense>
+        </div>
+      </div>
+
       {/* CTA */}
       <div style={{ background: "#2F5D52" }}>
         <div style={{ maxWidth: 980, margin: "0 auto", padding: "84px 48px", textAlign: "center" }}>
-          <h2 style={{ fontFamily: "var(--font-marcellus), serif", fontSize: "clamp(26px, 3.5vw, 40px)", color: "#FAFAF8", margin: "0 0 26px", fontWeight: 400 }}>
-            Not sure which fits? Let&apos;s find out together.
+          <h2 style={{ fontFamily: "var(--font-marcellus), serif", fontSize: "clamp(26px, 3.5vw, 40px)", color: "#FAFAF8", margin: "0 0 18px", fontWeight: 400 }}>
+            Not sure which fits?
           </h2>
+          <p style={{ fontFamily: "var(--font-jost), sans-serif", fontWeight: 300, fontSize: 16, lineHeight: 1.8, color: "#A9B6AE", margin: "0 0 30px" }}>
+            Send us a general enquiry and we&apos;ll help you find the right path.
+          </p>
           <Link href="/contact" style={{ display: "inline-block", fontFamily: "var(--font-jost), sans-serif", fontSize: 14, letterSpacing: "0.1em", textTransform: "uppercase", color: "#2F5D52", background: "#F5F0E8", padding: "18px 38px", borderRadius: 2, textDecoration: "none" }}>
-            Book a Session
+            Get in Touch
           </Link>
         </div>
       </div>
@@ -120,6 +145,9 @@ export default function Services() {
         @media (max-width: 768px) {
           .service-row { grid-template-columns: 1fr !important; gap: 28px !important; padding: 40px 0 !important; }
           .steps-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
+        }
+        @media (max-width: 900px) {
+          .intake-forms-section { padding: 60px 24px !important; }
         }
       `}</style>
     </div>

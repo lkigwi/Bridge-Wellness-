@@ -85,7 +85,7 @@ export default function Nav() {
             ))}
           </div>
           <Link
-            href="/contact"
+            href="/services"
             style={{
               fontFamily: "var(--font-jost), sans-serif",
               fontSize: 12.5,
@@ -174,7 +174,7 @@ export default function Nav() {
           </Link>
         ))}
         <Link
-          href="/contact"
+          href="/services"
           onClick={() => setMenuOpen(false)}
           style={{
             fontFamily: "var(--font-jost), sans-serif",

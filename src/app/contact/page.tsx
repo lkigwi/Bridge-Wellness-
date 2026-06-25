@@ -1,14 +1,14 @@
 import type { Metadata } from "next";
-import { Suspense } from "react";
-import IntakeForms from "@/components/IntakeForms";
+import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact | The Bridge Wellness Centre",
-  description: "Book a session with Miriam Gathoni Mwangi, LPC. Reach out for individual therapy, marriage coaching, child & adolescent therapy, or blended family therapy.",
+  description: "Get in touch with Miriam Gathoni Mwangi, LPC — for further enquiries about therapy services at The Bridge Wellness Centre.",
 };
 
 const contactInfo = [
-  { label: "Email", value: "hello@bridgewellness.co.ke" },
+  { label: "Email", value: "thebridgewellnesscentre@gmail.com" },
+  { label: "Phone", value: "0723 314 805" },
   { label: "Location", value: "Nairobi, Kenya" },
   { label: "Availability", value: "Monday – Saturday, by appointment" },
   { label: "Response time", value: "Within 1–2 business days" },
@@ -24,21 +24,19 @@ export default function Contact() {
           Contact
         </div>
         <h1 style={{ fontFamily: "var(--font-marcellus), serif", fontSize: "clamp(32px, 5vw, 54px)", color: "#2A2A28", margin: "0 auto 24px", fontWeight: 400, lineHeight: 1.14, maxWidth: 680 }}>
-          Reach out — there&apos;s no wrong way to start
+          Have a question? We&apos;re here to help.
         </h1>
         <p style={{ fontFamily: "var(--font-jost), sans-serif", fontWeight: 300, fontSize: 17.5, lineHeight: 1.8, color: "#6E6A64", margin: "0 auto", maxWidth: 540 }}>
-          Share a little about what you&apos;re looking for and Miriam will respond personally, usually within one to two business days.
+          For further enquiries, general questions, or to learn more about any of our services — send us a message and Miriam will respond personally.
         </p>
       </div>
 
       {/* Form + details */}
       <div style={{ maxWidth: 1140, margin: "0 auto", padding: "64px 48px 90px", display: "grid", gridTemplateColumns: "1fr 1fr", gap: 72, alignItems: "start" }} className="contact-grid">
 
-        {/* Intake forms */}
+        {/* Enquiry form */}
         <div>
-          <Suspense fallback={<div style={{ padding: 32, color: "#9A958C", fontFamily: "var(--font-jost), sans-serif" }}>Loading form…</div>}>
-            <IntakeForms />
-          </Suspense>
+          <ContactForm />
         </div>
 
         {/* Practice details */}
