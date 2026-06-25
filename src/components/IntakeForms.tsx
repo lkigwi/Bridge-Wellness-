@@ -137,6 +137,25 @@ function Note({ children }: { children: React.ReactNode }) {
   );
 }
 
+function RatingGroup({ name, label, low, high }: { name: string; label: string; low: string; high: string }) {
+  return (
+    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", gap: 16, padding: "10px 0", borderBottom: "1px solid #ECE7DE" }}>
+      <div style={{ flex: 1 }}>
+        <div style={{ fontFamily: "var(--font-jost), sans-serif", fontWeight: 300, fontSize: 14.5, color: "#3E3A34" }}>{label}</div>
+        <div style={{ fontFamily: "var(--font-jost), sans-serif", fontSize: 11.5, color: "#A8A39A", marginTop: 2 }}>1 = {low} · 5 = {high}</div>
+      </div>
+      <div style={{ display: "flex", gap: 16, flexShrink: 0 }}>
+        {[1, 2, 3, 4, 5].map((n) => (
+          <label key={n} style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: 4, cursor: "pointer", fontFamily: "var(--font-jost), sans-serif", fontSize: 13, color: "#9A958C" }}>
+            <input type="radio" name={name} value={String(n)} style={{ accentColor: "#5C8C6E", cursor: "pointer" }} />
+            {n}
+          </label>
+        ))}
+      </div>
+    </div>
+  );
+}
+
 function SubmitBtn({ loading }: { loading: boolean }) {
   return (
     <>
@@ -170,16 +189,37 @@ async function submitToFormspree(data: FormData, formType: string): Promise<bool
 ══════════════════════════════════════════════════════════════ */
 function IndividualForm({ onSuccess }: { onSuccess: () => void }) {
   const [loading, setLoading] = useState(false);
-  const [concerns, setConcerns] = useState<string[]>([]);
-  const [previousTherapy, setPreviousTherapy] = useState("");
   const [format, setFormat] = useState("");
-  const [safety, setSafety] = useState("");
+  const [gender, setGender] = useState("");
+  const [relStatus, setRelStatus] = useState("");
+  const [livingSituation, setLivingSituation] = useState("");
+  const [hasChildren, setHasChildren] = useState("");
+  const [employed, setEmployed] = useState("");
+  const [faith, setFaith] = useState("");
+  const [concerns, setConcerns] = useState<string[]>([]);
+  const [appetite, setAppetite] = useState("");
+  const [physActivity, setPhysActivity] = useState("");
+  const [mhDiagnosis, setMhDiagnosis] = useState("");
+  const [onMedication, setOnMedication] = useState("");
+  const [otherProvider, setOtherProvider] = useState("");
+  const [medConditions, setMedConditions] = useState("");
+  const [familyMH, setFamilyMH] = useState("");
+  const [prevTherapy, setPrevTherapy] = useState("");
+  const [therapyApproaches, setTherapyApproaches] = useState<string[]>([]);
+  const [therapistPref, setTherapistPref] = useState("");
+  const [homework, setHomework] = useState("");
+  const [spirituality, setSpirituality] = useState("");
+  const [selfHarm, setSelfHarm] = useState("");
+  const [harmOthers, setHarmOthers] = useState("");
+  const [unsafeHome, setUnsafeHome] = useState("");
+  const [substanceUse, setSubstanceUse] = useState("");
 
   const concernOptions = [
-    "Anxiety / excessive worry", "Stress / burnout", "Depression / low mood",
-    "Grief / loss", "Trauma", "Life transitions", "Self-worth / confidence",
-    "Relationship challenges", "Work-life balance", "Identity / faith questions",
-    "Women's issues", "Personal growth", "Other",
+    "Anxiety / worry", "Depression / low mood", "Grief / loss",
+    "Relationship difficulties", "Work / career stress", "Life transitions",
+    "Trauma / past experiences", "Self-esteem / identity", "Anger management",
+    "Family of origin issues", "Loneliness / isolation", "Burnout / exhaustion",
+    "Work-life balance", "Major decision-making", "Other",
   ];
 
   async function handleSubmit(e: FormEvent<HTMLFormElement>) {
@@ -188,74 +228,231 @@ function IndividualForm({ onSuccess }: { onSuccess: () => void }) {
     const form = e.currentTarget;
     const data = new FormData(form);
     data.set("concernsList", concerns.join(", ") || "None selected");
+    data.set("therapyApproaches", therapyApproaches.join(", ") || "None selected");
     const ok = await submitToFormspree(data, "Individual Therapy");
     setLoading(false);
-    if (ok) { onSuccess(); form.reset(); setConcerns([]); setPreviousTherapy(""); setFormat(""); setSafety(""); }
+    if (ok) {
+      onSuccess(); form.reset();
+      setConcerns([]); setTherapyApproaches([]);
+      setFormat(""); setGender(""); setRelStatus(""); setLivingSituation("");
+      setHasChildren(""); setEmployed(""); setFaith(""); setAppetite(""); setPhysActivity("");
+      setMhDiagnosis(""); setOnMedication(""); setOtherProvider(""); setMedConditions(""); setFamilyMH("");
+      setPrevTherapy(""); setTherapistPref(""); setHomework(""); setSpirituality("");
+      setSelfHarm(""); setHarmOthers(""); setUnsafeHome(""); setSubstanceUse("");
+    }
   }
 
   return (
     <form onSubmit={handleSubmit} style={{ display: "grid", gap: 18 }}>
+      <Note>Welcome. This form helps your therapist understand what you&apos;re carrying and what kind of support you&apos;re looking for. There are no right or wrong answers — simply share what feels relevant and true for you right now.</Note>
+
       <Sec num={1} title="Contact Information" />
       <Row>
         <F label="Full name" required><input name="name" type="text" required placeholder="First and last name" style={inp} /></F>
         <F label="Date of birth"><input name="dob" type="date" style={inp} /></F>
       </Row>
-      <Row>
-        <F label="Email address" required><input name="email" type="email" required placeholder="you@email.com" style={inp} /></F>
+      <Row3>
         <F label="Phone number"><input name="phone" type="tel" placeholder="+254 700 000 000" style={inp} /></F>
-      </Row>
+        <F label="Email address" required><input name="email" type="email" required placeholder="you@email.com" style={inp} /></F>
+        <F label="Preferred contact method">
+          <select name="preferredContact" style={sel}>
+            <option value="">Select…</option>
+            <option>Email</option>
+            <option>Phone call</option>
+            <option>WhatsApp</option>
+            <option>Any</option>
+          </select>
+        </F>
+      </Row3>
       <Row>
-        <F label="City / Country" required><input name="location" type="text" required placeholder="e.g. Nairobi, Kenya" style={inp} /></F>
-        <F label="Preferred session time"><input name="preferredTime" type="text" placeholder="e.g. Weekday evenings" style={inp} /></F>
+        <F label="City / Country"><input name="city" type="text" placeholder="e.g. Nairobi, Kenya" style={inp} /></F>
+        <F label="Occupation / Field of work"><input name="occupation" type="text" placeholder="e.g. Nurse, Teacher, Student" style={inp} /></F>
       </Row>
       <F label="Preferred session format">
         <RadioGroup name="_format" options={["In-person", "Telehealth / Virtual", "Either works"]} value={format} onChange={setFormat} />
         <input type="hidden" name="sessionFormat" value={format} />
       </F>
+      <Row3>
+        <F label="Best day(s) to meet"><input name="bestDays" type="text" placeholder="e.g. Mon, Wed, Sat" style={inp} /></F>
+        <F label="Preferred session time"><input name="preferredTime" type="text" placeholder="e.g. Evenings" style={inp} /></F>
+        <F label="Emergency contact name & phone"><input name="emergencyContact" type="text" placeholder="Name — +254 700 000 000" style={inp} /></F>
+      </Row3>
 
-      <Sec num={2} title="Reason for Seeking Therapy" />
-      <F label="In your own words, what is bringing you to therapy right now?" required>
-        <textarea name="mainConcern" required rows={4} placeholder="Share as much or as little as feels right — there are no wrong answers." style={ta} />
+      <Sec num={2} title="About You" />
+      <F label="Gender">
+        <RadioGroup name="_gender" options={["Male", "Female"]} value={gender} onChange={setGender} />
+        <input type="hidden" name="gender" value={gender} />
       </F>
-      <F label="When did you first notice these concerns?">
-        <input name="onsetConcerns" type="text" placeholder="e.g. About 6 months ago, after a job change" style={inp} />
+      <F label="Relationship status">
+        <RadioGroup name="_relStatus" options={["Single", "Dating", "Married", "Separated / Divorced", "Widowed"]} value={relStatus} onChange={setRelStatus} />
+        <input type="hidden" name="relationshipStatus" value={relStatus} />
+      </F>
+      <F label="Living situation">
+        <RadioGroup name="_living" options={["Alone", "With spouse", "With family", "Other"]} value={livingSituation} onChange={setLivingSituation} />
+        <input type="hidden" name="livingSituation" value={livingSituation} />
+      </F>
+      <F label="Do you have children?">
+        <RadioGroup name="_children" options={["Yes — living with me", "Yes — not in my home", "No"]} value={hasChildren} onChange={setHasChildren} />
+        <input type="hidden" name="hasChildren" value={hasChildren} />
+      </F>
+      {hasChildren.startsWith("Yes") && (
+        <F label="Ages and any relevant context (optional)">
+          <input name="childrenContext" type="text" placeholder="e.g. Two kids, ages 4 and 8" style={inp} />
+        </F>
+      )}
+      <F label="Are you currently employed?">
+        <RadioGroup name="_employed" options={["Full-time", "Part-time", "Self-employed", "Student", "Unemployed"]} value={employed} onChange={setEmployed} />
+        <input type="hidden" name="employmentStatus" value={employed} />
+      </F>
+      <F label="Do you have a faith or spiritual background that is important to you?">
+        <RadioGroup name="_faith" options={["Yes", "No", "Prefer to discuss in session"]} value={faith} onChange={setFaith} />
+        <input type="hidden" name="faithBackground" value={faith} />
+      </F>
+
+      <Sec num={3} title="Reason for Seeking Therapy" />
+      <F label="In your own words, what brings you to therapy at this time?" required>
+        <textarea name="mainConcern" required rows={4} placeholder="Share as much or as little as feels right — there are no wrong answers." style={ta} />
       </F>
       <F label="Areas of concern — check all that apply">
         <CheckGroup options={concernOptions} checked={concerns} onChange={setConcerns} />
         <input type="hidden" name="concernsList" value={concerns.join(", ")} />
       </F>
+      {concerns.includes("Other") && (
+        <F label="If you selected 'Other,' please describe">
+          <textarea name="otherConcernDetail" rows={2} placeholder="Please describe" style={ta} />
+        </F>
+      )}
 
-      <Sec num={3} title="Therapy & Health History" />
+      <Sec num={4} title="Current Functioning" />
+      <Note>Rate each area from 1 (significant difficulty) to 5 (doing well).</Note>
+      <div style={{ display: "grid", gap: 0, border: "1px solid #ECE7DE", borderRadius: 2, padding: "4px 14px" }}>
+        <RatingGroup name="sleepQuality" label="Sleep quality" low="Very poor" high="Restful" />
+        <RatingGroup name="energyLevels" label="Energy levels day-to-day" low="Constantly drained" high="Generally energized" />
+        <RatingGroup name="concentration" label="Ability to concentrate / focus" low="Very difficult" high="No difficulty" />
+        <RatingGroup name="emotionalReg" label="Emotional regulation (managing feelings)" low="Very difficult" high="Managing well" />
+        <RatingGroup name="relationships" label="Quality of close relationships" low="Very strained" high="Healthy & supportive" />
+        <div style={{ borderBottom: "none" }}>
+          <RatingGroup name="dailyFunctioning" label="Satisfaction with daily functioning" low="Struggling significantly" high="Functioning well" />
+        </div>
+      </div>
+      <F label="Appetite / eating">
+        <RadioGroup name="_appetite" options={["Significantly decreased", "Somewhat decreased", "Normal", "Somewhat increased", "Significantly increased"]} value={appetite} onChange={setAppetite} />
+        <input type="hidden" name="appetite" value={appetite} />
+      </F>
+      <F label="Physical activity">
+        <RadioGroup name="_physActivity" options={["None currently", "Occasionally", "Regularly"]} value={physActivity} onChange={setPhysActivity} />
+        <input type="hidden" name="physicalActivity" value={physActivity} />
+      </F>
+
+      <Sec num={5} title="Mental Health & Medical Background" />
+      <F label="Have you received a mental health diagnosis?">
+        <RadioGroup name="_mhDiagnosis" options={["Yes", "No", "Unsure"]} value={mhDiagnosis} onChange={setMhDiagnosis} />
+        <input type="hidden" name="mhDiagnosis" value={mhDiagnosis} />
+      </F>
+      {mhDiagnosis === "Yes" && (
+        <F label="Please list (e.g., depression, anxiety, PTSD, ADHD)">
+          <input name="mhDiagnosisList" type="text" placeholder="Diagnosis/es" style={inp} />
+        </F>
+      )}
+      <F label="Are you currently taking any medication?">
+        <RadioGroup name="_medication" options={["Yes", "No"]} value={onMedication} onChange={setOnMedication} />
+        <input type="hidden" name="onMedication" value={onMedication} />
+      </F>
+      {onMedication === "Yes" && (
+        <F label="Medication(s) and prescribing provider">
+          <input name="medicationDetails" type="text" placeholder="Medication name and prescriber" style={inp} />
+        </F>
+      )}
+      <F label="Are you currently working with any other mental health provider?">
+        <RadioGroup name="_otherProvider" options={["Yes", "No"]} value={otherProvider} onChange={setOtherProvider} />
+        <input type="hidden" name="otherProvider" value={otherProvider} />
+      </F>
+      {otherProvider === "Yes" && (
+        <F label="Provider type and focus (optional)">
+          <input name="otherProviderDetail" type="text" placeholder="e.g. Psychiatrist — medication management" style={inp} />
+        </F>
+      )}
+      <F label="Do you have any significant medical conditions?">
+        <RadioGroup name="_medConditions" options={["Yes", "No"]} value={medConditions} onChange={setMedConditions} />
+        <input type="hidden" name="medicalConditions" value={medConditions} />
+      </F>
+      {medConditions === "Yes" && (
+        <F label="Brief description">
+          <textarea name="medicalConditionsDetail" rows={2} placeholder="Condition and treating provider" style={ta} />
+        </F>
+      )}
+      <F label="Family history of mental health concerns?">
+        <RadioGroup name="_familyMH" options={["Yes", "No", "Unsure"]} value={familyMH} onChange={setFamilyMH} />
+        <input type="hidden" name="familyMentalHealth" value={familyMH} />
+      </F>
+
+      <Sec num={6} title="Therapy History" />
       <F label="Have you been in therapy before?">
-        <RadioGroup name="_prevTherapy" options={["Yes, and it was helpful", "Yes, but I didn't find it helpful", "No, this is my first time"]} value={previousTherapy} onChange={setPreviousTherapy} />
-        <input type="hidden" name="previousTherapy" value={previousTherapy} />
+        <RadioGroup name="_prevTherapy" options={["Yes", "No — this is my first time"]} value={prevTherapy} onChange={setPrevTherapy} />
+        <input type="hidden" name="previousTherapy" value={prevTherapy} />
       </F>
-      <F label="If yes — what was helpful or unhelpful? (optional)">
-        <textarea name="therapyFeedback" rows={2} placeholder="Any context that might help Miriam." style={ta} />
-      </F>
-      <F label="Are you currently taking any medications? (optional)">
-        <input name="medications" type="text" placeholder="Medication name and prescribing provider" style={inp} />
-      </F>
-      <F label="Any diagnosed medical or mental health conditions? (optional)">
-        <input name="diagnoses" type="text" placeholder="Diagnosis and when it was made" style={inp} />
+      {prevTherapy === "Yes" && (
+        <>
+          <F label="Approximately how long ago, and for how long?">
+            <input name="prevTherapyDuration" type="text" placeholder="e.g. 2 years ago, for about 6 months" style={inp} />
+          </F>
+          <F label="What was helpful or unhelpful? (optional)">
+            <textarea name="prevTherapyFeedback" rows={2} placeholder="Any context that might help Miriam." style={ta} />
+          </F>
+        </>
+      )}
+      <F label="What therapeutic approach(es) have you experienced? — check all that apply">
+        <CheckGroup
+          options={["CBT", "Talk therapy", "EMDR", "DBT", "Faith-based", "Unsure", "Other"]}
+          checked={therapyApproaches}
+          onChange={setTherapyApproaches}
+        />
+        <input type="hidden" name="therapyApproaches" value={therapyApproaches.join(", ")} />
       </F>
 
-      <Sec num={4} title="Goals for Therapy" />
-      <F label="If therapy is successful, what will be different 6 months from now?" required>
-        <textarea name="goals" required rows={3} placeholder="Describe what healing, progress, or relief would look like for you." style={ta} />
+      <Sec num={7} title="Goals & Therapeutic Preferences" />
+      <F label="What do you hope to gain from therapy? What does success look like for you?" required>
+        <textarea name="goals" required rows={3} placeholder="Describe what healing, growth, or relief would look like for you." style={ta} />
+      </F>
+      <F label="I prefer a therapist who:">
+        <RadioGroup name="_therapistPref" options={["Is more directive / structured", "Follows my lead", "A balance of both"]} value={therapistPref} onChange={setTherapistPref} />
+        <input type="hidden" name="therapistPreference" value={therapistPref} />
+      </F>
+      <F label="How do you feel about homework or exercises between sessions?">
+        <RadioGroup name="_homework" options={["Open to it", "Prefer minimal", "Prefer none"]} value={homework} onChange={setHomework} />
+        <input type="hidden" name="homeworkPreference" value={homework} />
+      </F>
+      <F label="Is incorporating faith or spirituality into sessions important to you?">
+        <RadioGroup name="_spirituality" options={["Yes, please", "If relevant", "Not at this time"]} value={spirituality} onChange={setSpirituality} />
+        <input type="hidden" name="faithInSessions" value={spirituality} />
+      </F>
+      <F label="Is there anything else you'd like your therapist to know before your first session? (optional)">
+        <textarea name="additionalInfo" rows={3} placeholder="Any other context that would be helpful." style={ta} />
       </F>
       <F label="How did you hear about this practice?">
         <input name="referral" type="text" placeholder="e.g. Google, a friend, social media" style={inp} />
       </F>
 
-      <Sec num={5} title="Safety & Wellbeing" />
-      <Note>Your safety matters. These questions help ensure therapy is the right level of support for your situation.</Note>
-      <F label="Are you currently experiencing thoughts of self-harm or suicide?">
-        <RadioGroup name="_safety" options={["No", "Yes", "Prefer to discuss on the call"]} value={safety} onChange={setSafety} />
-        <input type="hidden" name="safetyWellbeing" value={safety} />
+      <Sec num={8} title="Safety & Wellbeing" />
+      <Note>Your safety is a priority. These questions are standard and confidential. If you need immediate support, please contact a crisis line or emergency services.</Note>
+      <F label="Are you currently having thoughts of harming yourself?">
+        <RadioGroup name="_selfHarm" options={["No", "Yes", "Prefer to discuss"]} value={selfHarm} onChange={setSelfHarm} />
+        <input type="hidden" name="selfHarmThoughts" value={selfHarm} />
       </F>
-      <F label="Anything else you'd like Miriam to know before your first session? (optional)">
-        <textarea name="additionalInfo" rows={3} placeholder="Any other context that would be helpful." style={ta} />
+      <F label="Are you currently having thoughts of harming others?">
+        <RadioGroup name="_harmOthers" options={["No", "Yes", "Prefer to discuss"]} value={harmOthers} onChange={setHarmOthers} />
+        <input type="hidden" name="harmOthersThoughts" value={harmOthers} />
+      </F>
+      <F label="Are you currently in an unsafe home situation?">
+        <RadioGroup name="_unsafeHome" options={["No", "Yes", "Prefer to discuss"]} value={unsafeHome} onChange={setUnsafeHome} />
+        <input type="hidden" name="unsafeHomeSituation" value={unsafeHome} />
+      </F>
+      <F label="Is substance use currently affecting your life?">
+        <RadioGroup name="_substanceUse" options={["No", "Yes", "Prefer to discuss"]} value={substanceUse} onChange={setSubstanceUse} />
+        <input type="hidden" name="substanceUseAffecting" value={substanceUse} />
+      </F>
+      <F label="Any additional context about your safety or wellbeing (optional)">
+        <textarea name="safetyAdditional" rows={2} placeholder="Anything else Miriam should know." style={ta} />
       </F>
       <SubmitBtn loading={loading} />
     </form>
