@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Gilda+Display&family=Marcellus&family=Mulish:wght@300;400;500;600;700&family=Mukta:wght@300;400;500;600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<meta name="design_doc_mode" content="canvas">
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; }
+  @keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+</style>
+</helmet>
+
+<!-- ============ DIRECTION 1 — STILLNESS ============ -->
+<div style="position:absolute; left:0; top:0; width:1200px;">
+  <div data-drags-parent="1" style="font-family:'Mulish',sans-serif; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:#6E6A64; margin-bottom:14px; font-weight:600;">01 · Stillness <span style="color:#A8A39A; font-weight:400; letter-spacing:.04em; text-transform:none;">— Editorial calm, airy whitespace, asymmetric</span></div>
+  <div data-screen-label="Direction 1 — Stillness" style="background:#FAFAF8; border-radius:3px; box-shadow:0 1px 3px rgba(0,0,0,.08); overflow:hidden;">
+
+    <!-- nav -->
+    <div style="display:flex; align-items:center; justify-content:space-between; padding:30px 56px;">
+      <img src="assets/logo.jpg" alt="The Bridge Wellness Centre" style="height:54px; mix-blend-mode:multiply;">
+      <div style="display:flex; align-items:center; gap:40px;">
+        <div style="display:flex; gap:34px; font-family:'Mulish',sans-serif; font-size:14.5px; letter-spacing:.02em; color:#4A4A46;">
+          <span style="color:#2F5D52; font-weight:600;">Home</span>
+          <span>About</span><span>Services</span><span>FAQs</span><span>Contact</span>
+        </div>
+        <div style="font-family:'Mulish',sans-serif; font-size:14px; font-weight:600; color:#2F5D52; border:1.5px solid #5C8C6E; border-radius:100px; padding:11px 24px;">Book a Session</div>
+      </div>
+    </div>
+
+    <!-- hero -->
+    <div style="display:grid; grid-template-columns:1.04fr 0.96fr; gap:60px; align-items:center; padding:64px 56px 86px;">
+      <div>
+        <div style="font-family:'Mulish',sans-serif; font-size:13px; letter-spacing:.22em; text-transform:uppercase; color:#5C8C6E; font-weight:600; margin-bottom:26px;">A safe place to begin</div>
+        <h1 style="font-family:'Cormorant Garamond',serif; font-weight:500; font-size:67px; line-height:1.04; color:#2F5D52; margin:0 0 26px; letter-spacing:-0.01em;">You Don't Have<br>To Carry This Alone</h1>
+        <p style="font-family:'Mulish',sans-serif; font-weight:300; font-size:17.5px; line-height:1.7; color:#6E6A64; margin:0 0 38px; max-width:430px;">Compassionate, professional counseling with Miriam Gathoni Mwangi, LPC — walking alongside individuals, couples, and families toward healing, clarity, and hope.</p>
+        <div style="display:flex; gap:16px; margin-bottom:26px;">
+          <div style="font-family:'Mulish',sans-serif; font-size:15.5px; font-weight:600; color:#fff; background:#5C8C6E; border-radius:100px; padding:16px 30px;">I Need Counseling</div>
+          <div style="font-family:'Mulish',sans-serif; font-size:15.5px; font-weight:600; color:#2F5D52; background:transparent; border:1.5px solid #C9D6CB; border-radius:100px; padding:16px 30px;">We Need Coaching</div>
+        </div>
+        <div style="font-family:'Mulish',sans-serif; font-size:13.5px; letter-spacing:.04em; color:#A8A39A;">Virtual sessions worldwide &nbsp;·&nbsp; Based in Nairobi, Kenya</div>
+      </div>
+      <div style="position:relative;">
+        <div style="position:absolute; right:-18px; top:-22px; width:140px; height:140px; background:#E8E4F0; border-radius:6px;"></div>
+        <div style="position:relative; height:500px; border-radius:6px; overflow:hidden; background:linear-gradient(155deg,#D6E3D8 0%,#EDE7DB 58%,#E8E4F0 100%); display:flex; align-items:flex-end; justify-content:flex-start;">
+          <div style="position:absolute; inset:0; background:radial-gradient(120% 80% at 70% 18%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%);"></div>
+          <div style="position:relative; font-family:'Mulish',sans-serif; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#6E8C76; margin:26px;">Calming imagery</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- divider -->
+    <div style="height:1px; background:#EAE5DC; margin:0 56px;"></div>
+
+    <!-- services teaser -->
+    <div style="padding:60px 56px 76px;">
+      <div style="text-align:center; font-family:'Cormorant Garamond',serif; font-style:italic; font-size:26px; color:#5C8C6E; margin-bottom:48px;">Ways we walk with you</div>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:40px;">
+        <div><div style="font-family:'Cormorant Garamond',serif; font-size:30px; color:#C7BFD8; margin-bottom:14px;">01</div><div style="font-family:'Cormorant Garamond',serif; font-size:23px; color:#2F5D52; margin-bottom:8px;">Individual Therapy</div><div style="font-family:'Mulish',sans-serif; font-weight:300; font-size:14px; line-height:1.6; color:#8A857D;">Personal space to heal, grow, and rediscover yourself.</div></div>
+        <div><div style="font-family:'Cormorant Garamond',serif; font-size:30px; color:#C7BFD8; margin-bottom:14px;">02</div><div style="font-family:'Cormorant Garamond',serif; font-size:23px; color:#2F5D52; margin-bottom:8px;">Marriage Coaching</div><div style="font-family:'Mulish',sans-serif; font-weight:300; font-size:14px; line-height:1.6; color:#8A857D;">Rebuild connection, trust, and communication together.</div></div>
+        <div><div style="font-family:'Cormorant Garamond',serif; font-size:30px; color:#C7BFD8; margin-bottom:14px;">03</div><div style="font-family:'Cormorant Garamond',serif; font-size:23px; color:#2F5D52; margin-bottom:8px;">Child &amp; Adolescent</div><div style="font-family:'Mulish',sans-serif; font-weight:300; font-size:14px; line-height:1.6; color:#8A857D;">Gentle, age-attuned support for younger hearts.</div></div>
+        <div><div style="font-family:'Cormorant Garamond',serif; font-size:30px; color:#C7BFD8; margin-bottom:14px;">04</div><div style="font-family:'Cormorant Garamond',serif; font-size:23px; color:#2F5D52; margin-bottom:8px;">Blended Family</div><div style="font-family:'Mulish',sans-serif; font-weight:300; font-size:14px; line-height:1.6; color:#8A857D;">Weaving two families into one with grace.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ DIRECTION 2 — SANCTUARY ============ -->
+<div style="position:absolute; left:1340px; top:0; width:1200px;">
+  <div data-drags-parent="1" style="font-family:'Mulish',sans-serif; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:#6E6A64; margin-bottom:14px; font-weight:600;">02 · Sanctuary <span style="color:#A8A39A; font-weight:400; letter-spacing:.04em; text-transform:none;">— Warm, organic, nurturing, watercolor-soft</span></div>
+  <div data-screen-label="Direction 2 — Sanctuary" style="background:#F5F0E8; border-radius:3px; box-shadow:0 1px 3px rgba(0,0,0,.08); overflow:hidden; position:relative;">
+
+    <!-- decorative blobs -->
+    <div style="position:absolute; left:-90px; top:120px; width:320px; height:320px; border-radius:50%; background:#E8E4F0; opacity:.5; filter:blur(8px); animation:floaty 9s ease-in-out infinite;"></div>
+    <div style="position:absolute; right:-70px; top:60px; width:240px; height:240px; border-radius:50%; background:#DDE8DE; opacity:.6; filter:blur(6px); animation:floaty 11s ease-in-out infinite;"></div>
+
+    <!-- floating nav -->
+    <div style="position:relative; margin:24px 32px 0; background:#FFFFFF; border-radius:100px; box-shadow:0 10px 30px rgba(92,140,110,.10); display:flex; align-items:center; justify-content:space-between; padding:14px 18px 14px 28px;">
+      <img src="assets/logo.jpg" alt="The Bridge Wellness Centre" style="height:46px;">
+      <div style="display:flex; align-items:center; gap:34px;">
+        <div style="display:flex; gap:30px; font-family:'Mukta',sans-serif; font-size:15px; color:#5A554E;">
+          <span style="color:#5C8C6E; font-weight:600;">Home</span>
+          <span>About</span><span>Services</span><span>FAQs</span><span>Contact</span>
+        </div>
+        <div style="font-family:'Mukta',sans-serif; font-size:14.5px; font-weight:600; color:#fff; background:#5C8C6E; border-radius:100px; padding:11px 26px;">Book a Session</div>
+      </div>
+    </div>
+
+    <!-- hero centered -->
+    <div style="position:relative; text-align:center; padding:62px 56px 30px;">
+      <div style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:25px; color:#9F94BE; margin-bottom:18px;">welcome to a gentler way forward</div>
+      <h1 style="font-family:'Gilda Display',serif; font-size:62px; line-height:1.1; color:#2F5D52; margin:0 0 8px; font-weight:400;">You Don't Have To<br>Carry This <span style="position:relative; display:inline-block;">Alone
+        <svg viewBox="0 0 240 24" style="position:absolute; left:-6%; bottom:-14px; width:112%; height:22px;" preserveAspectRatio="none"><path d="M4 14 C 60 4, 120 22, 176 11 S 232 6, 236 12" fill="none" stroke="#9BB9A4" stroke-width="7" stroke-linecap="round" opacity="0.7"/></svg>
+      </span></h1>
+      <p style="font-family:'Mukta',sans-serif; font-weight:300; font-size:18px; line-height:1.75; color:#6E6A64; margin:34px auto 38px; max-width:560px;">A warm, professional space with Miriam Gathoni Mwangi, LPC. Whether you come on your own or together, you are welcome here — exactly as you are.</p>
+      <div style="display:flex; gap:16px; justify-content:center;">
+        <div style="font-family:'Mukta',sans-serif; font-size:16px; font-weight:600; color:#fff; background:#5C8C6E; border-radius:100px; padding:17px 34px; box-shadow:0 8px 20px rgba(92,140,110,.22);">I Need Counseling</div>
+        <div style="font-family:'Mukta',sans-serif; font-size:16px; font-weight:600; color:#5A4F73; background:#E8E4F0; border-radius:100px; padding:17px 34px;">We Need Coaching</div>
+      </div>
+    </div>
+
+    <!-- wave into white -->
+    <div style="position:relative; margin-top:46px;">
+      <svg viewBox="0 0 1200 90" style="display:block; width:100%; height:90px;" preserveAspectRatio="none"><path d="M0 60 C 200 10, 420 92, 640 52 S 1040 6, 1200 46 L 1200 90 L 0 90 Z" fill="#FFFFFF"/></svg>
+    </div>
+
+    <!-- soft cards -->
+    <div style="position:relative; background:#FFFFFF; padding:18px 56px 78px;">
+      <div style="text-align:center; font-family:'Gilda Display',serif; font-size:32px; color:#2F5D52; margin-bottom:42px;">How we can support you</div>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); gap:22px;">
+        <div style="background:#F5F0E8; border-radius:26px; padding:32px 26px;"><div style="width:46px; height:46px; border-radius:50%; background:#DDE8DE; margin-bottom:20px;"></div><div style="font-family:'Gilda Display',serif; font-size:21px; color:#2F5D52; margin-bottom:10px;">Individual Therapy</div><div style="font-family:'Mukta',sans-serif; font-weight:300; font-size:14px; line-height:1.65; color:#8A857D;">A personal space to heal and grow.</div></div>
+        <div style="background:#E8E4F0; border-radius:26px; padding:32px 26px;"><div style="width:46px; height:46px; border-radius:50%; background:#D2C9E4; margin-bottom:20px;"></div><div style="font-family:'Gilda Display',serif; font-size:21px; color:#2F5D52; margin-bottom:10px;">Marriage Coaching</div><div style="font-family:'Mukta',sans-serif; font-weight:300; font-size:14px; line-height:1.65; color:#8A857D;">Rebuild trust and connection.</div></div>
+        <div style="background:#F5F0E8; border-radius:26px; padding:32px 26px;"><div style="width:46px; height:46px; border-radius:50%; background:#DDE8DE; margin-bottom:20px;"></div><div style="font-family:'Gilda Display',serif; font-size:21px; color:#2F5D52; margin-bottom:10px;">Child &amp; Adolescent</div><div style="font-family:'Mukta',sans-serif; font-weight:300; font-size:14px; line-height:1.65; color:#8A857D;">Gentle support for young hearts.</div></div>
+        <div style="background:#E8E4F0; border-radius:26px; padding:32px 26px;"><div style="width:46px; height:46px; border-radius:50%; background:#D2C9E4; margin-bottom:20px;"></div><div style="font-family:'Gilda Display',serif; font-size:21px; color:#2F5D52; margin-bottom:10px;">Blended Family</div><div style="font-family:'Mukta',sans-serif; font-weight:300; font-size:14px; line-height:1.65; color:#8A857D;">Weaving two families into one.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ DIRECTION 3 — THE BRIDGE ============ -->
+<div style="position:absolute; left:2680px; top:0; width:1200px;">
+  <div data-drags-parent="1" style="font-family:'Mulish',sans-serif; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:#6E6A64; margin-bottom:14px; font-weight:600;">03 · The Bridge <span style="color:#A8A39A; font-weight:400; letter-spacing:.04em; text-transform:none;">— Quiet luxury, structured grid, boutique</span></div>
+  <div data-screen-label="Direction 3 — The Bridge" style="background:#FAFAF8; border-radius:3px; box-shadow:0 1px 3px rgba(0,0,0,.08); overflow:hidden;">
+
+    <!-- nav -->
+    <div style="display:flex; align-items:center; justify-content:space-between; padding:26px 56px; border-bottom:1px solid #ECE7DE;">
+      <img src="assets/logo.jpg" alt="The Bridge Wellness Centre" style="height:50px; mix-blend-mode:multiply;">
+      <div style="display:flex; gap:34px; font-family:'Jost',sans-serif; font-size:13px; letter-spacing:.16em; text-transform:uppercase; color:#5A554E;">
+        <span style="color:#5C8C6E;">Home</span>
+        <span>About</span><span>Services</span><span>FAQs</span><span>Contact</span>
+      </div>
+      <div style="font-family:'Jost',sans-serif; font-size:13px; letter-spacing:.16em; text-transform:uppercase; color:#2F5D52;">Book a Session →</div>
+    </div>
+
+    <!-- hero split -->
+    <div style="display:grid; grid-template-columns:1fr 1fr;">
+      <div style="padding:84px 56px;">
+        <div style="display:flex; align-items:center; gap:16px; margin-bottom:30px;">
+          <div style="width:42px; height:1px; background:#5C8C6E;"></div>
+          <div style="font-family:'Jost',sans-serif; font-size:12px; letter-spacing:.24em; text-transform:uppercase; color:#9A958C;">The Bridge · Wellness Centre</div>
+        </div>
+        <h1 style="font-family:'Marcellus',serif; font-size:60px; line-height:1.12; color:#2A2A28; margin:0 0 28px; font-weight:400;">You Don't Have To Carry This Alone</h1>
+        <p style="font-family:'Jost',sans-serif; font-weight:300; font-size:17px; line-height:1.75; color:#6E6A64; margin:0 0 40px; max-width:420px;">Professional counseling and coaching with Miriam Gathoni Mwangi, LPC. Quietly steady support for individuals, couples, and families — in Nairobi and across the world.</p>
+        <div style="display:flex; gap:14px; margin-bottom:34px;">
+          <div style="font-family:'Jost',sans-serif; font-size:14px; letter-spacing:.08em; text-transform:uppercase; color:#fff; background:#5C8C6E; padding:17px 30px; border-radius:2px;">I Need Counseling</div>
+          <div style="font-family:'Jost',sans-serif; font-size:14px; letter-spacing:.08em; text-transform:uppercase; color:#2F5D52; border:1px solid #C2CFC4; padding:17px 30px; border-radius:2px;">We Need Coaching</div>
+        </div>
+        <div style="font-family:'Jost',sans-serif; font-size:13px; letter-spacing:.06em; color:#A8A39A;">Virtual sessions worldwide · Based in Nairobi</div>
+      </div>
+      <div style="position:relative; background:linear-gradient(180deg,#C9D7CC 0%,#DFD9CC 60%,#E3DECF 100%); min-height:560px;">
+        <div style="position:absolute; inset:24px; border:1px solid rgba(255,255,255,.5);"></div>
+        <div style="position:absolute; left:40px; bottom:38px; font-family:'Marcellus',serif; font-size:15px; letter-spacing:.04em; color:#3E5A48;">A quiet place to cross over.</div>
+      </div>
+    </div>
+
+    <!-- structured services -->
+    <div style="border-top:1px solid #ECE7DE; display:grid; grid-template-columns:repeat(4,1fr);">
+      <div style="padding:46px 34px; border-right:1px solid #ECE7DE;"><div style="font-family:'Marcellus',serif; font-size:14px; color:#B6AED0; letter-spacing:.1em; margin-bottom:18px;">01</div><div style="font-family:'Marcellus',serif; font-size:20px; color:#2A2A28; margin-bottom:10px;">Individual Therapy</div><div style="font-family:'Jost',sans-serif; font-weight:300; font-size:13.5px; line-height:1.65; color:#8A857D;">Personal space to heal and grow.</div></div>
+      <div style="padding:46px 34px; border-right:1px solid #ECE7DE;"><div style="font-family:'Marcellus',serif; font-size:14px; color:#B6AED0; letter-spacing:.1em; margin-bottom:18px;">02</div><div style="font-family:'Marcellus',serif; font-size:20px; color:#2A2A28; margin-bottom:10px;">Marriage Coaching</div><div style="font-family:'Jost',sans-serif; font-weight:300; font-size:13.5px; line-height:1.65; color:#8A857D;">Rebuild trust and connection.</div></div>
+      <div style="padding:46px 34px; border-right:1px solid #ECE7DE;"><div style="font-family:'Marcellus',serif; font-size:14px; color:#B6AED0; letter-spacing:.1em; margin-bottom:18px;">03</div><div style="font-family:'Marcellus',serif; font-size:20px; color:#2A2A28; margin-bottom:10px;">Child &amp; Adolescent</div><div style="font-family:'Jost',sans-serif; font-weight:300; font-size:13.5px; line-height:1.65; color:#8A857D;">Gentle support for young hearts.</div></div>
+      <div style="padding:46px 34px;"><div style="font-family:'Marcellus',serif; font-size:14px; color:#B6AED0; letter-spacing:.1em; margin-bottom:18px;">04</div><div style="font-family:'Marcellus',serif; font-size:20px; color:#2A2A28; margin-bottom:10px;">Blended Family</div><div style="font-family:'Jost',sans-serif; font-weight:300; font-size:13.5px; line-height:1.65; color:#8A857D;">Weaving two families into one.</div></div>
+    </div>
+  </div>
+</div>
+
+</x-dc>
+</body>
+</html>

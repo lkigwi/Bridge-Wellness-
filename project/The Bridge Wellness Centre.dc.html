@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Marcellus&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="image-slot.js"></script>
+<style>
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: #FAFAF8; }
+  @keyframes fadeUp { from { transform: translateY(16px); } to { transform:none; } }
+  image-slot { display:block; }
+</style>
+</helmet>
+
+<div style="background:#FAFAF8; min-height:100vh; font-family:'Jost',sans-serif;">
+
+  <!-- ===================== NAV ===================== -->
+  <div style="position:sticky; top:0; z-index:50; background:rgba(250,250,248,0.86); backdrop-filter:blur(12px); border-bottom:1px solid #ECE7DE;">
+    <div style="max-width:1240px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; padding:18px 48px;">
+      <img src="assets/logo.jpg" alt="The Bridge Wellness Centre" onClick="{{ goHome }}" style="height:50px; mix-blend-mode:multiply; cursor:pointer;">
+      <div style="display:flex; align-items:center; gap:38px;">
+        <div style="display:flex; gap:34px; font-family:'Jost',sans-serif; font-size:13px; letter-spacing:.16em; text-transform:uppercase;">
+          <span onClick="{{ goHome }}" style="cursor:pointer; color:{{ homeColor }};">Home</span>
+          <span onClick="{{ goAbout }}" style="cursor:pointer; color:{{ aboutColor }};">About</span>
+          <span onClick="{{ goServices }}" style="cursor:pointer; color:{{ servicesColor }};">Services</span>
+          <span onClick="{{ goFaqs }}" style="cursor:pointer; color:{{ faqsColor }};">FAQs</span>
+          <span onClick="{{ goContact }}" style="cursor:pointer; color:{{ contactColor }};">Contact</span>
+        </div>
+        <span onClick="{{ goContact }}" style="cursor:pointer; font-family:'Jost',sans-serif; font-size:12.5px; letter-spacing:.14em; text-transform:uppercase; color:#fff; background:#5C8C6E; padding:13px 24px; border-radius:2px; white-space:nowrap;">Book a Session</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================== HOME ===================== -->
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+  <div style="animation:fadeUp .5s ease both;">
+
+    <!-- hero -->
+    <div style="max-width:1240px; margin:0 auto; display:grid; grid-template-columns:1fr 1fr; align-items:stretch;">
+      <div style="padding:96px 48px 96px 48px; display:flex; flex-direction:column; justify-content:center;">
+        <div style="display:flex; align-items:center; gap:16px; margin-bottom:30px;">
+          <div style="width:42px; height:1px; background:#5C8C6E;"></div>
+          <div style="font-family:'Jost',sans-serif; font-size:12px; letter-spacing:.24em; text-transform:uppercase; color:#9A958C;">The Bridge · Wellness Centre</div>
+        </div>
+        <h1 style="font-family:'Marcellus',serif; font-size:62px; line-height:1.1; color:#2A2A28; margin:0 0 28px; font-weight:400;">You Don't Have To Carry This Alone</h1>
+        <p style="font-family:'Jost',sans-serif; font-weight:300; font-size:17.5px; line-height:1.78; color:#6E6A64; margin:0 0 40px; max-width:440px;">Professional counseling and coaching with Miriam Gathoni Mwangi, LPC. Quietly steady support for individuals, couples, and families — in Nairobi and across the world.</p>
+        <div style="display:flex; gap:14px; margin-bottom:36px; flex-wrap:wrap;">
+          <span onClick="{{ goContact }}" style="cursor:pointer; font-family:'Jost',sans-serif; font-size:14px; letter-spacing:.08em; text-transform:uppercase; color:#fff; background:#5C8C6E; padding:17px 30px; border-radius:2px;">I Need Counseling</span>
+          <span onClick="{{ goContact }}" style="cursor:pointer; font-family:'Jost',sans-serif; font-size:14px; letter-spacing:.08em; text-transform:uppercase; color:#2F5D52; border:1px solid #C2CFC4; padding:17px 30px; border-radius:2px;">We Need Coaching</span>
+        </div>
+        <div style="font-family:'Jost',sans-serif; font-size:13px; letter-spacing:.06em; color:#A8A39A;">Virtual sessions worldwide · Based in Nairobi, Kenya</div>
+      </div>
+      <div style="position:relative; padding:40px 48px 40px 0;">
+        <div style="position:relative; height:100%; min-height:520px;">
+          <div style="position:absolute; right:0; top:24px; width:150px; height:150px; background:#E8E4F0; z-index:0;"></div>
+          <image-slot id="home-hero" shape="rect" placeholder="Drop a calming hero image" style="position:relative; z-index:1; width:100%; height:100%; min-height:520px; background:linear-gradient(180deg,#C9D7CC 0%,#DFD9CC 60%,#E3DECF 100%);"></image-slot>
+          <div style="position:absolute; inset:64px 16px 16px 32px; border:1px solid rgba(255,255,255,.55); z-index:2; pointer-events:none;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- intro statement -->
+    <div style="background:#F5F0E8;">
+      <div style="max-width:980px; margin:0 auto; padding:92px 48px; text-align:center;">
+        <div style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:25px; color:#9F94BE; margin-bottom:22px;">a steady place to begin again</div>
+        <p style="font-family:'Marcellus',serif; font-size:32px; line-height:1.5; color:#2F5D52; margin:0; font-weight:400;">Healing rarely happens in isolation. The Bridge is a calm, confidential space where your story is met with warmth, skill, and genuine care — one honest conversation at a time.</p>
+      </div>
+    </div>
+
+    <!-- services -->
+    <div style="max-width:1240px; margin:0 auto; padding:96px 48px 40px;">
+      <div style="display:flex; align-items:flex-end; justify-content:space-between; margin-bottom:54px; flex-wrap:wrap; gap:20px;">
+        <div>
+          <div style="font-family:'Jost',sans-serif; font-size:12px; letter-spacing:.24em; text-transform:uppercase; color:#9A958C; margin-bottom:16px;">What we offer</div>
+          <h2 style="font-family:'Marcellus',serif; font-size:44px; color:#2A2A28; margin:0; font-weight:400; line-height:1.14;">Ways we walk with you</h2>
+        </div>
+        <span onClick="{{ goServices }}" style="cursor:pointer; font-family:'Jost',sans-serif; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:#5C8C6E; border-bottom:1px solid #C2CFC4; padding-bottom:4px;">All services →</span>
+      </div>
+      <div style="display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid #ECE7DE;">
+        <sc-for list="{{ services }}" as="s" hint-placeholder-count="4">
+          <div onClick="{{ s.go }}" style="cursor:pointer; padding:40px 26px 44px; border-right:1px solid #ECE7DE; border-bottom:1px solid #ECE7DE;">
+            <div style="font-family:'Marcellus',serif; font-size:14px; color:#B6AED0; letter-spacing:.1em; margin-bottom:20px;">{{ s.num }}</div>
+            <div style="font-family:'Marcellus',serif; font-size:21px; color:#2A2A28; margin-bottom:12px; line-height:1.25;">{{ s.title }}</div>
+            <div style="font-family:'Jost',sans-serif; font-weight:300; font-size:14px; line-height:1.7; color:#8A857D;">{{ s.short }}</div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <!-- about teaser -->
+    <div style="max-width:1240px; margin:0 auto; padding:80px 48px 96px; display:grid; grid-template-columns:0.9fr 1.1fr; gap:64px; align-items:center;">
+      <div style="position:relative;">
+        <div style="position:absolute; left:-18px; bottom:-18px; width:130px; height:130px; background:#DDE8DE; z-index:0;"></div>
+        <img src="assets/miriam-portrait.png" alt="Miriam Gathoni Mwangi, LPC" style="position:relative; z-index:1; display:block; width:100%; height:440px; object-fit:cover; object-position:50% 22%; border-radius:12px;">
+      </div>
+      <div>
+        <div style="font-family:'Jost',sans-serif; font-size:12px; letter-spacing:.24em; text-transform:uppercase; color:#9A958C; margin-bottom:18px;">Your counselor</div>
+        <h2 style="font-family:'Marcellus',serif; font-size:40px; color:#2A2A28; margin:0 0 22px; font-weight:400; line-height:1.16;">Miriam Gathoni Mwangi, LPC</h2>
+        <p style="font-family:'Jost',sans-serif; font-weight:300; font-size:17px; line-height:1.8; color:#6E6A64; margin:0 0 18px;">A Licensed Professional Counselor with a heart for restoration, Miriam brings warmth, discretion, and clinical depth to every session. Her approach is gentle but purposeful — creating space for you to be fully heard, then walking with you toward real change.</p>
+        <p style="font-family:'Jost',sans-serif; font-weight:300; font-size:17px; line-height:1.8; color:#6E6A64; margin:0 0 30px;">From her practice in Nairobi, she supports clients across the world through secure virtual sessions.</p>
+        <span onClick="{{ goAbout }}" style="cursor:pointer; font-family:'Jost',sans-serif; font-size:13px; letter-spacing:.14em; text-transform:uppercase; color:#5C8C6E; border-bottom:1px solid #C2CFC4; padding-bottom:4px;">More about Miriam →</span>
+      </div>
+    </div>
+
+    <!-- closing CTA -->
+    <div style="background:#2F5D52;">
+      <div style="max-width:980px; margin:0 auto; padding:96px 48px; text-align:center;">
+        <div style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:24px; color:#A7C2B0; margin-bottom:20px;">when you're ready</div>
+        <h2 style="font-family:'Marcellus',serif; font-size:46px; color:#FAFAF8; margin:0 0 24px; font-weight:400; line-height:1.16;">Take the first step across the bridge</h2>
+        <p style="font-family:'Jost',sans-serif; font-weight:300; font-size:17px; line-height:1.8; color:#CDE0D4; margin:0 auto 38px; max-width:520px;">Reaching out is often the hardest part. Begin with a brief, no-pressure conversation about what you're looking for.</p>
+        <span onClick="{{ goContact }}" style="cursor:pointer; display:inline-block; font-family:'Jost',sans-serif; font-size:14px; letter-spacing:.1em; text-transform:uppercase; color:#2F5D52; background:#F5F0E8; padding:18px 38px; border-radius:2px;">Book a Session</span>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ===================== ABOUT ===================== -->
+  <sc-if value="{{ isAbout }}" hint-placeholder-val="{{ true }}">
+  <div style="animation:fadeUp .5s ease both;">
+    <!-- page header -->
+    <div style="max-width:1240px; margin:0 auto; padding:84px 48px 0; text-align:center;">
+      <div style="font-family:'Jost',sans-serif; font-size:12px; letter-spacing:.24em; text-transform:uppercase; color:#9A958C; margin-bottom:20px;">About</div>
+      <h1 style="font-family:'Marcellus',serif; font-size:54px; color:#2A2A28; margin:0 auto; font-weight:400; line-height:1.14; max-width:760px;">Compassion, met with professional care</h1>
+    </div>
+
+    <!-- bio split -->
+    <div style="max-width:1240px; margin:0 auto; padding:72px 48px 24px; display:grid; grid-template-columns:1fr 1.15fr; gap:70px; align-items:start;">
+      <div style="position:relative;">
+        <div style="position:absolute; right:-18px; top:-18px; width:140px; height:140px; background:#E8E4F0; z-index:0;"></div>
+        <img src="assets/miriam-portrait.png" alt="Miriam Gathoni Mwangi, LPC" style="position:relative; z-index:1; display:block; width:100%; height:540px; object-fit:cover; object-position:50% 20%; border-radius:12px;">
+        <div style="position:absolute; inset:auto 16px -1px 16px; height:54px; pointer-events:none;"></div>
+      </div>
+      <div>
+        <h2 style="font-family:'Marcellus',serif; font-size:34px; color:#2F5D52; margin:0 0 8px; font-weight:400;">Miriam Gathoni Mwangi</h2>
+        <div style="font-family:'Jost',sans-serif; font-size:13px; letter-spacing:.18em; text-transform:uppercase; color:#9A958C; margin-bottom:28px;">Licensed Professional Counselor</div>
+        <p style="font-family:'Jost',sans-serif; font-weight:300; font-size:17px; line-height:1.85; color:#6E6A64; margin:0 0 18px;">For more than a decade, Miriam has walked alongside people in their most tender seasons — grief, anxiety, strained marriages, the quiet ache of feeling unseen. She believes every person carries the capacity to heal, and that the right support can make that healing possible.</p>
+        <p style="font-family:'Jost',sans-serif; font-weight:300; font-size:17px; line-height:1.85; color:#6E6A64; margin:0 0 18px;">Her work is grounded in evidence-based practice and softened by deep human warmth. Sessions are unhurried and judgment-free — a place to set down what you've been carrying and find a way forward that feels true to you.</p>
+        <p style="font-family:'Jost',sans-serif; font-weight:300; font-size:17px; line-height:1.85; color:#6E6A64; margin:0 0 32px;">Based in Nairobi, Miriam serves clients locally and internationally through secure, confidential virtual sessions.</p>
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:1px; background:#ECE7DE; border:1px solid #ECE7DE;">
+          <div style="background:#FAFAF8; padding:24px 26px;"><div style="font-family:'Marcellus',serif; font-size:30px; color:#5C8C6E;">10+</div><div style="font-family:'Jost',sans-serif; font-size:13px; color:#8A857D; letter-spacing:.04em;">Years of practice</div></div>
+          <div style="background:#FAFAF8; padding:24px 26px;"><div style="font-family:'Marcellus',serif; font-size:30px; color:#5C8C6E;">Global</div><div style="font-family:'Jost',sans-serif; font-size:13px; color:#8A857D; letter-spacing:.04em;">Clients worldwide</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- philosophy -->
+    <div style="background:#F5F0E8; margin-top:64px;">
+      <div style="max-width:1240px; margin:0 auto; padding:90px 48px;">
+        <div style="text-align:center; margin-bottom:56px;">
+          <div style="font-family:'Jost',sans-serif; font-size:12px; letter-spacing:.24em; text-transform:uppercase; color:#9A958C; margin-bottom:16px;">How I work</div>
+          <h2 style="font-family:'Marcellus',serif; font-size:40px; color:#2A2A28; margin:0; font-weight:400;">A few things I hold to</h2>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:32px;">
+          <sc-for list="{{ values }}" as="v" hint-placeholder-count="3">
+            <div style="background:#FAFAF8; padding:40px 34px; border-top:2px solid #5C8C6E;">
+              <div style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:26px; color:#B6AED0; margin-bottom:18px;">{{ v.num }}</div>
+              <div style="font-family:'Marcellus',serif; font-size:22px; color:#2A2A28; margin-bottom:12px;">{{ v.title }}</div>
+              <div style="font-family:'Jost',sans-serif; font-weight:300; font-size:15px; line-height:1.75; color:#8A857D;">{{ v.body }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <!-- credentials strip -->
+    <div style="max-width:1240px; margin:0 auto; padding:84px 48px;">
+      <div style="display:grid; grid-template-columns:0.8fr 1.2fr; gap:64px;">
+        <h2 style="font-family:'Marcellus',serif; font-size:34px; color:#2A2A28; margin:0; font-weight:400; line-height:1.2;">Credentials &amp; approach</h2>
+        <div style="font-family:'Jost',sans-serif;">
+          <sc-for list="{{ creds }}" as="c" hint-placeholder-count="4">
+            <div style="display:flex; gap:24px; padding:22px 0; border-bottom:1px solid #ECE7DE;">
+              <div style="font-family:'Marcellus',serif; font-size:14px; color:#B6AED0; min-width:34px;">{{ c.num }}</div>
+              <div style="font-weight:300; font-size:16.5px; line-height:1.7; color:#5A554E;">{{ c.text }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div style="background:#2F5D52;">
+      <div style="max-width:980px; margin:0 auto; padding:84px 48px; text-align:center;">
+        <h2 style="font-family:'Marcellus',serif; font-size:40px; color:#FAFAF8; margin:0 0 26px; font-weight:400;">Let's talk about where you are</h2>
+        <span onClick="{{ goContact }}" style="cursor:pointer; display:inline-block; font-family:'Jost',sans-serif; font-size:14px; letter-spacing:.1em; text-transform:uppercase; color:#2F5D52; background:#F5F0E8; padding:18px 38px; border-radius:2px;">Book a Session</span>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ===================== SERVICES ===================== -->
+  <sc-if value="{{ isServices }}" hint-placeholder-val="{{ true }}">
+  <div style="animation:fadeUp .5s ease both;">
+    <div style="max-width:1240px; margin:0 auto; padding:84px 48px 0; text-align:center;">
+      <div style="font-family:'Jost',sans-serif; font-size:12px; letter-spacing:.24em; text-transform:uppercase; color:#9A958C; margin-bottom:20px;">Services</div>
+      <h1 style="font-family:'Marcellus',serif; font-size:54px; color:#2A2A28; margin:0 auto 24px; font-weight:400; line-height:1.14; max-width:720px;">Support shaped around your life</h1>
+      <p style="font-family:'Jost',sans-serif; font-weight:300; font-size:17.5px; line-height:1.8; color:#6E6A64; margin:0 auto; max-width:560px;">Whether you come on your own or alongside the people you love, each path begins the same way — with being truly heard.</p>
+    </div>
+
+    <div style="max-width:1100px; margin:0 auto; padding:72px 48px 40px;">
+      <sc-for list="{{ services }}" as="s" hint-placeholder-count="4">
+        <div style="display:grid; grid-template-columns:0.42fr 0.58fr; gap:56px; align-items:center; padding:56px 0; border-top:1px solid #ECE7DE;">
+          <div>
+            <div style="font-family:'Marcellus',serif; font-size:15px; color:#B6AED0; letter-spacing:.12em; margin-bottom:18px;">{{ s.num }}</div>
+            <h2 style="font-family:'Marcellus',serif; font-size:34px; color:#2A2A28; margin:0 0 14px; font-weight:400; line-height:1.2;">{{ s.title }}</h2>
+            <div style="width:48px; height:1px; background:#5C8C6E;"></div>
+          </div>
+          <div>
+            <p style="font-family:'Jost',sans-serif; font-weight:300; font-size:17px; line-height:1.85; color:#6E6A64; margin:0 0 22px;">{{ s.long }}</p>
+            <div style="display:flex; flex-wrap:wrap; gap:10px;">
+              <sc-for list="{{ s.tags }}" as="t" hint-placeholder-count="3">
+                <span style="font-family:'Jost',sans-serif; font-size:13px; letter-spacing:.04em; color:#2F5D52; background:#EDEAE2; border:1px solid #E3DCCF; padding:8px 16px; border-radius:100px;">{{ t }}</span>
+              </sc-for>
+            </div>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+
+    <!-- how it works -->
+    <div style="background:#F5F0E8; margin-top:48px;">
+      <div style="max-width:1240px; margin:0 auto; padding:90px 48px;">
+        <div style="text-align:center; margin-bottom:54px;">
+          <div style="font-family:'Jost',sans-serif; font-size:12px; letter-spacing:.24em; text-transform:uppercase; color:#9A958C; margin-bottom:16px;">Getting started</div>
+          <h2 style="font-family:'Marcellus',serif; font-size:40px; color:#2A2A28; margin:0; font-weight:400;">How it works</h2>
+        </div>
+        <div style="display:grid; grid-template-columns:repeat(3,1fr); gap:28px;">
+          <sc-for list="{{ steps }}" as="st" hint-placeholder-count="3">
+            <div style="text-align:center; padding:0 16px;">
+              <div style="width:56px; height:56px; border-radius:50%; border:1px solid #C2CFC4; display:flex; align-items:center; justify-content:center; margin:0 auto 22px; font-family:'Marcellus',serif; font-size:20px; color:#5C8C6E;">{{ st.num }}</div>
+              <div style="font-family:'Marcellus',serif; font-size:21px; color:#2A2A28; margin-bottom:10px;">{{ st.title }}</div>
+              <div style="font-family:'Jost',sans-serif; font-weight:300; font-size:15px; line-height:1.75; color:#8A857D;">{{ st.body }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <div style="background:#2F5D52;">
+      <div style="max-width:980px; margin:0 auto; padding:84px 48px; text-align:center;">
+        <h2 style="font-family:'Marcellus',serif; font-size:40px; color:#FAFAF8; margin:0 0 26px; font-weight:400;">Not sure which fits? Let's find out together.</h2>
+        <span onClick="{{ goContact }}" style="cursor:pointer; display:inline-block; font-family:'Jost',sans-serif; font-size:14px; letter-spacing:.1em; text-transform:uppercase; color:#2F5D52; background:#F5F0E8; padding:18px 38px; border-radius:2px;">Book a Session</span>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ===================== FAQS ===================== -->
+  <sc-if value="{{ isFaqs }}" hint-placeholder-val="{{ true }}">
+  <div style="animation:fadeUp .5s ease both;">
+    <div style="max-width:1240px; margin:0 auto; padding:84px 48px 0; text-align:center;">
+      <div style="font-family:'Jost',sans-serif; font-size:12px; letter-spacing:.24em; text-transform:uppercase; color:#9A958C; margin-bottom:20px;">FAQs</div>
+      <h1 style="font-family:'Marcellus',serif; font-size:54px; color:#2A2A28; margin:0 auto 24px; font-weight:400; line-height:1.14; max-width:680px;">Questions, gently answered</h1>
+      <p style="font-family:'Jost',sans-serif; font-weight:300; font-size:17.5px; line-height:1.8; color:#6E6A64; margin:0 auto; max-width:540px;">A few things people often wonder before reaching out. If your question isn't here, you're always welcome to ask.</p>
+    </div>
+
+    <div style="max-width:840px; margin:0 auto; padding:64px 48px 40px;">
+      <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="6">
+        <div onClick="{{ f.toggle }}" style="cursor:pointer; border-bottom:1px solid #ECE7DE; padding:28px 0;">
+          <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:24px;">
+            <div style="font-family:'Marcellus',serif; font-size:21px; color:#2A2A28; line-height:1.35;">{{ f.q }}</div>
+            <div style="font-family:'Jost',sans-serif; font-size:24px; color:#5C8C6E; line-height:1; min-width:22px; text-align:center; transform:rotate({{ f.rot }}); transition:transform .25s;">+</div>
+          </div>
+          <sc-if value="{{ f.isOpen }}" hint-placeholder-val="{{ false }}">
+            <p style="font-family:'Jost',sans-serif; font-weight:300; font-size:16.5px; line-height:1.85; color:#6E6A64; margin:16px 0 4px; max-width:680px;">{{ f.a }}</p>
+          </sc-if>
+        </div>
+      </sc-for>
+    </div>
+
+    <div style="max-width:840px; margin:0 auto; padding:24px 48px 96px; text-align:center;">
+      <div style="background:#F5F0E8; padding:48px; border-radius:3px;">
+        <div style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:24px; color:#9F94BE; margin-bottom:12px;">still wondering?</div>
+        <p style="font-family:'Jost',sans-serif; font-weight:300; font-size:16.5px; line-height:1.8; color:#6E6A64; margin:0 0 26px;">Send your question directly — Miriam reads every message personally.</p>
+        <span onClick="{{ goContact }}" style="cursor:pointer; display:inline-block; font-family:'Jost',sans-serif; font-size:14px; letter-spacing:.1em; text-transform:uppercase; color:#fff; background:#5C8C6E; padding:16px 34px; border-radius:2px;">Ask a Question</span>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ===================== CONTACT ===================== -->
+  <sc-if value="{{ isContact }}" hint-placeholder-val="{{ true }}">
+  <div style="animation:fadeUp .5s ease both;">
+    <div style="max-width:1240px; margin:0 auto; padding:84px 48px 0; text-align:center;">
+      <div style="font-family:'Jost',sans-serif; font-size:12px; letter-spacing:.24em; text-transform:uppercase; color:#9A958C; margin-bottom:20px;">Contact</div>
+      <h1 style="font-family:'Marcellus',serif; font-size:54px; color:#2A2A28; margin:0 auto 24px; font-weight:400; line-height:1.14; max-width:680px;">Reach out — there's no wrong way to start</h1>
+      <p style="font-family:'Jost',sans-serif; font-weight:300; font-size:17.5px; line-height:1.8; color:#6E6A64; margin:0 auto; max-width:540px;">Share a little about what you're looking for and Miriam will respond personally, usually within one to two business days.</p>
+    </div>
+
+    <div style="max-width:1140px; margin:0 auto; padding:64px 48px 90px; display:grid; grid-template-columns:1fr 1fr; gap:72px; align-items:start;">
+      <!-- form -->
+      <div>
+        <div style="display:grid; gap:22px;">
+          <div>
+            <label style="font-family:'Jost',sans-serif; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:#9A958C; display:block; margin-bottom:10px;">Your name</label>
+            <input type="text" placeholder="First and last name" style="width:100%; font-family:'Jost',sans-serif; font-size:16px; font-weight:300; color:#2A2A28; background:#fff; border:1px solid #E3DCCF; border-radius:2px; padding:15px 16px; outline:none;">
+          </div>
+          <div>
+            <label style="font-family:'Jost',sans-serif; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:#9A958C; display:block; margin-bottom:10px;">Email</label>
+            <input type="email" placeholder="you@email.com" style="width:100%; font-family:'Jost',sans-serif; font-size:16px; font-weight:300; color:#2A2A28; background:#fff; border:1px solid #E3DCCF; border-radius:2px; padding:15px 16px; outline:none;">
+          </div>
+          <div>
+            <label style="font-family:'Jost',sans-serif; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:#9A958C; display:block; margin-bottom:10px;">I'm interested in</label>
+            <select style="width:100%; font-family:'Jost',sans-serif; font-size:16px; font-weight:300; color:#2A2A28; background:#fff; border:1px solid #E3DCCF; border-radius:2px; padding:15px 16px; outline:none; appearance:none;">
+              <option>Individual Therapy</option>
+              <option>Marriage Coaching</option>
+              <option>Child &amp; Adolescent Therapy</option>
+              <option>Blended Family Therapy</option>
+              <option>I'm not sure yet</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-family:'Jost',sans-serif; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:#9A958C; display:block; margin-bottom:10px;">How can I help?</label>
+            <textarea rows="5" placeholder="Share as much or as little as you'd like." style="width:100%; font-family:'Jost',sans-serif; font-size:16px; font-weight:300; color:#2A2A28; background:#fff; border:1px solid #E3DCCF; border-radius:2px; padding:15px 16px; outline:none; resize:vertical;"></textarea>
+          </div>
+          <span style="cursor:pointer; text-align:center; font-family:'Jost',sans-serif; font-size:14px; letter-spacing:.1em; text-transform:uppercase; color:#fff; background:#5C8C6E; padding:17px 30px; border-radius:2px;">Send Message</span>
+          <div style="font-family:'Jost',sans-serif; font-size:12.5px; line-height:1.6; color:#A8A39A; text-align:center;">Your message is private and confidential.</div>
+        </div>
+      </div>
+
+      <!-- details -->
+      <div style="background:#F5F0E8; padding:48px 44px; border-radius:3px;">
+        <h2 style="font-family:'Marcellus',serif; font-size:28px; color:#2F5D52; margin:0 0 30px; font-weight:400;">Practice details</h2>
+        <sc-for list="{{ contactInfo }}" as="ci" hint-placeholder-count="4">
+          <div style="padding:20px 0; border-bottom:1px solid #E3DCCF;">
+            <div style="font-family:'Jost',sans-serif; font-size:12px; letter-spacing:.16em; text-transform:uppercase; color:#9A958C; margin-bottom:8px;">{{ ci.label }}</div>
+            <div style="font-family:'Jost',sans-serif; font-weight:300; font-size:17px; line-height:1.6; color:#3E3A34;">{{ ci.value }}</div>
+          </div>
+        </sc-for>
+        <div style="margin-top:30px; padding:22px 24px; background:#E8E4F0; border-radius:3px;">
+          <div style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:21px; color:#5A4F73; margin-bottom:8px;">Sessions worldwide</div>
+          <div style="font-family:'Jost',sans-serif; font-weight:300; font-size:15px; line-height:1.7; color:#6A6280;">All sessions are held over secure video, so you can meet from wherever you feel most at ease — anywhere in the world.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+
+  <!-- ===================== FOOTER ===================== -->
+  <div style="background:#27332E;">
+    <div style="max-width:1240px; margin:0 auto; padding:72px 48px 40px;">
+      <div style="display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:48px; padding-bottom:48px; border-bottom:1px solid rgba(255,255,255,.12);">
+        <div>
+          <img src="assets/logo.jpg" alt="The Bridge Wellness Centre" style="height:56px; background:#FAFAF8; padding:8px 12px; border-radius:3px; margin-bottom:22px;">
+          <p style="font-family:'Jost',sans-serif; font-weight:300; font-size:15px; line-height:1.8; color:#A9B6AE; margin:0; max-width:300px;">A calm, confidential space for healing — with Miriam Gathoni Mwangi, LPC. Nairobi, Kenya, and online worldwide.</p>
+        </div>
+        <div>
+          <div style="font-family:'Jost',sans-serif; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#7E8F84; margin-bottom:20px;">Explore</div>
+          <div style="display:flex; flex-direction:column; gap:13px; font-family:'Jost',sans-serif; font-weight:300; font-size:15px; color:#CBD5CD;">
+            <span onClick="{{ goHome }}" style="cursor:pointer;">Home</span>
+            <span onClick="{{ goAbout }}" style="cursor:pointer;">About</span>
+            <span onClick="{{ goServices }}" style="cursor:pointer;">Services</span>
+            <span onClick="{{ goFaqs }}" style="cursor:pointer;">FAQs</span>
+            <span onClick="{{ goContact }}" style="cursor:pointer;">Contact</span>
+          </div>
+        </div>
+        <div>
+          <div style="font-family:'Jost',sans-serif; font-size:12px; letter-spacing:.18em; text-transform:uppercase; color:#7E8F84; margin-bottom:20px;">Connect</div>
+          <div style="display:flex; flex-direction:column; gap:13px; font-family:'Jost',sans-serif; font-weight:300; font-size:15px; color:#CBD5CD;">
+            <span>hello@bridgewellness.co.ke</span>
+            <span>Nairobi, Kenya</span>
+            <span>Virtual sessions worldwide</span>
+          </div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:center; justify-content:space-between; padding-top:26px; flex-wrap:wrap; gap:12px;">
+        <div style="font-family:'Jost',sans-serif; font-size:13px; font-weight:300; color:#7E8F84;">© 2026 The Bridge Wellness Centre. All rights reserved.</div>
+        <div style="font-family:'Cormorant Garamond',serif; font-style:italic; font-size:17px; color:#9FB0A4;">You don't have to carry this alone.</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = { page: 'home', open: 0 };
+
+  go(page) {
+    this.setState({ page });
+    if (typeof window !== 'undefined') window.scrollTo({ top: 0, behavior: 'auto' });
+  }
+
+  renderVals() {
+    const page = this.state.page;
+    const active = '#2F5D52';
+    const idle = '#5A554E';
+    const col = (p) => (page === p ? active : idle);
+
+    const services = [
+      { num: '01', title: 'Individual Therapy',
+        short: 'Personal space to heal and grow.',
+        long: 'A confidential, one-to-one space to work through anxiety, depression, grief, burnout, or the quiet weight of life transitions. Together we make sense of what you\u2019re feeling and rebuild a steadier sense of self.',
+        tags: ['Anxiety & stress', 'Depression', 'Grief & loss', 'Self-worth', 'Life transitions'],
+        go: () => this.go('services') },
+      { num: '02', title: 'Marriage Coaching',
+        short: 'Rebuild trust and connection.',
+        long: 'For couples who want to feel close again. We work on communication, trust, conflict, and intimacy \u2014 whether you\u2019re repairing after a rupture, preparing for marriage, or simply wanting to grow together.',
+        tags: ['Communication', 'Rebuilding trust', 'Conflict', 'Intimacy', 'Premarital'],
+        go: () => this.go('services') },
+      { num: '03', title: 'Child & Adolescent Therapy',
+        short: 'Gentle support for young hearts.',
+        long: 'Age-attuned, compassionate support for children and teens navigating big emotions, anxiety, behavioral challenges, school pressure, or questions of identity \u2014 with parents gently guided along the way.',
+        tags: ['Big emotions', 'Anxiety', 'Behavior', 'School stress', 'Identity'],
+        go: () => this.go('services') },
+      { num: '04', title: 'Blended Family Therapy',
+        short: 'Weaving two families into one.',
+        long: 'Bringing two families together takes patience and grace. We work through step-parenting, co-parenting, loyalty and belonging, and the day-to-day rhythms that help everyone feel they truly have a place.',
+        tags: ['Step-parenting', 'Co-parenting', 'Belonging', 'New routines'],
+        go: () => this.go('services') },
+    ];
+
+    const values = [
+      { num: 'i', title: 'You set the pace', body: 'Healing isn\u2019t rushed. We move at a rhythm that feels safe, never pushing past what you\u2019re ready for.' },
+      { num: 'ii', title: 'No judgment, ever', body: 'Whatever you bring is met with warmth and respect. This is a place to be honest without fear.' },
+      { num: 'iii', title: 'Real, lasting change', body: 'Comfort matters \u2014 and so does progress. We work toward tools and insight you carry well beyond our sessions.' },
+    ];
+
+    const creds = [
+      { num: '01', text: 'Licensed Professional Counselor (LPC), practicing in Nairobi, Kenya.' },
+      { num: '02', text: 'Over a decade supporting individuals, couples, and families through change.' },
+      { num: '03', text: 'Evidence-based, client-centered approach drawing on CBT, emotionally focused, and family-systems work.' },
+      { num: '04', text: 'Experienced in secure virtual care for clients across multiple countries and time zones.' },
+    ];
+
+    const steps = [
+      { num: '1', title: 'Reach out', body: 'Send a short message about what\u2019s bringing you here. No detail is too small \u2014 or too big.' },
+      { num: '2', title: 'Intro conversation', body: 'We meet for a brief, no-pressure call to see if working together feels right for you.' },
+      { num: '3', title: 'Begin together', body: 'We schedule your first session and start, gently, wherever you are today.' },
+    ];
+
+    const faqData = [
+      { q: 'Do you offer virtual sessions?', a: 'Yes. All sessions are held over secure, confidential video, so you can meet with Miriam from wherever you feel most comfortable \u2014 in Nairobi or anywhere in the world.' },
+      { q: 'How long is each session?', a: 'Sessions typically run 50 to 60 minutes. For couples and families, longer sessions can be arranged when helpful.' },
+      { q: 'How do I get started?', a: 'Simply send a message through the contact page. Miriam will reply personally to arrange a brief introductory conversation before your first session.' },
+      { q: 'Is everything I share confidential?', a: 'Completely. What you bring to sessions stays private, held within the bounds of professional ethics and the law. Your trust is treated with the utmost care.' },
+      { q: 'How many sessions will I need?', a: 'It varies from person to person. Some find clarity in a handful of sessions; others value longer-term support. We\u2019ll regularly revisit what feels right for you.' },
+      { q: 'Do you work with clients outside Kenya?', a: 'Yes. Miriam supports clients internationally through secure virtual sessions, and is glad to accommodate different time zones where possible.' },
+      { q: 'What are your fees?', a: 'Fees are shared during your introductory conversation, so they can be discussed in the context of your needs and the type of support you\u2019re seeking.' },
+    ];
+    const faqs = faqData.map((f, i) => ({
+      q: f.q, a: f.a,
+      isOpen: this.state.open === i,
+      rot: this.state.open === i ? '45deg' : '0deg',
+      toggle: () => this.setState(s => ({ open: s.open === i ? -1 : i })),
+    }));
+
+    const contactInfo = [
+      { label: 'Email', value: 'hello@bridgewellness.co.ke' },
+      { label: 'Location', value: 'Nairobi, Kenya' },
+      { label: 'Availability', value: 'Monday \u2013 Saturday, by appointment' },
+      { label: 'Response time', value: 'Within 1\u20132 business days' },
+    ];
+
+    return {
+      isHome: page === 'home', isAbout: page === 'about', isServices: page === 'services',
+      isFaqs: page === 'faqs', isContact: page === 'contact',
+      homeColor: col('home'), aboutColor: col('about'), servicesColor: col('services'),
+      faqsColor: col('faqs'), contactColor: col('contact'),
+      goHome: () => this.go('home'), goAbout: () => this.go('about'),
+      goServices: () => this.go('services'), goFaqs: () => this.go('faqs'),
+      goContact: () => this.go('contact'),
+      services, values, creds, steps, faqs, contactInfo,
+    };
+  }
+}
+</script>
+</body>
+</html>
